@@ -1,0 +1,3 @@
+{
+  "autopep8.args": ["--ignore", "E302,E305,E501"]
+}

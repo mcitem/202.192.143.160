@@ -1,0 +1,60 @@
+name: fc3
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm b
+
+      - name: s deploy
+        run: |
+          cp -r .vitepress/dist/* .github/.fc
+          pnpm install -g @serverless-devs/s
+          export ACCOUNT_ID=${{ secrets.ALIYUN_ACCOUNT_ID_LIN }}
+          export ACCESS_KEY_ID=${{ secrets.ALIYUN_ACCESS_KEY_ID_LIN }}
+          export ACCESS_KEY_SECRET=${{ secrets.ALIYUN_ACCESS_KEY_SECRET_LIN }}
+          mkdir -p ~/.s
+          echo "default:" > ~/.s/access.yaml
+          echo "  AccountID: $ACCOUNT_ID" >> ~/.s/access.yaml
+          echo "  AccessKeyID: $ACCESS_KEY_ID" >> ~/.s/access.yaml
+          echo "  AccessKeySecret: $ACCESS_KEY_SECRET" >> ~/.s/access.yaml
+          cd .github/.fc; s deploy -y
+          s info
+
+      - name: Refresh Caches
+        run: |
+          wget https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz
+          tar zxf aliyun-cli-linux-latest-amd64.tgz
+          chmod 777 ./aliyun
+          ./aliyun version
+          ./aliyun configure set \
+            --profile default \
+            --mode AK \
+            --access-key-id ${{secrets.ALIYUN_ACCESS_KEY_ID_LIN}} \
+            --access-key-secret ${{secrets.ALIYUN_ACCESS_KEY_SECRET_LIN}} \
+            --region cn-shenzhen
+          ./aliyun cdn RefreshObjectCaches --region cn-hangzhou --ObjectType Directory --Force true --ObjectPath 'https://202.192.143.160.mcitem.net/'

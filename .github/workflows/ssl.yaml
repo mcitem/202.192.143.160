@@ -1,0 +1,36 @@
+name: ssl
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "59 11 1 */2 *" # 每两个月的第一天午夜运行一次
+
+jobs:
+  ssl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main
+        run: |
+          curl https://get.acme.sh | sh -s email=my@example.com
+
+          export Ali_Key="${{ secrets.ALIYUN_ACCESS_KEY_ID_MCITEM }}"
+          export Ali_Secret="${{ secrets.ALIYUN_ACCESS_KEY_SECRET_MCITEM }}"
+
+          ~/.acme.sh/acme.sh --issue --dns dns_ali -d 202.192.143.160.mcitem.net --keylength 4096
+
+          NUMBER_CERT_CONTENT=$(cat ~/.acme.sh/202.192.143.160.mcitem.net/202.192.143.160.mcitem.net.cer)
+          NUMBER_KEY_CONTENT=$(cat ~/.acme.sh/202.192.143.160.mcitem.net/202.192.143.160.mcitem.net.key)
+
+          wget https://github.com/aliyun/aliyun-cli/releases/download/v3.0.227/aliyun-cli-linux-3.0.227-amd64.tgz
+          tar zxf aliyun-cli-linux-3.0.227-amd64.tgz
+
+          chmod 777 ./aliyun
+          ./aliyun version
+
+          ./aliyun configure set \
+            --profile default \
+            --mode AK \
+            --access-key-id ${{secrets.ALIYUN_ACCESS_KEY_ID_LIN}} \
+            --access-key-secret ${{secrets.ALIYUN_ACCESS_KEY_SECRET_LIN}} \
+            --region cn-shenzhen
+
+          ./aliyun cdn BatchSetCdnDomainServerCertificate --region cn-shenzhen --DomainName '202.192.143.160.mcitem.net' --SSLProtocol on --CertType upload --CertName '202.192.143.160.mcitem.net' --ForceSet 1 --SSLPri="${NUMBER_KEY_CONTENT}" --SSLPub="${NUMBER_CERT_CONTENT}"

@@ -1,0 +1,35 @@
+edition: 3.0.0
+name: fc3-example
+access: default
+resources:
+  fcDemo:
+    component: fc3
+    props:
+      region: cn-shenzhen
+      handler: index.handler
+      role: ""
+      description: ""
+      timeout: 60
+      diskSize: 512
+      internetAccess: true
+      layers:
+        - acs:fc:cn-shenzhen:official:layers/Nginx/versions/1
+      customRuntimeConfig:
+        port: 9000
+        command:
+          - /opt/bin/nginx
+          - "-c"
+          - /code/nginx.conf
+          - "-g"
+          - daemon off;
+      functionName: func-83f8gg1h
+      runtime: custom.debian10
+      cpu: 0.05
+      instanceConcurrency: 20
+      memorySize: 128
+      environmentVariables:
+        PATH: >-
+          /opt/nginx/sbin:/usr/local/bin/apache-maven/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/ruby/bin:/opt/bin:/code:/code/bin
+        LD_LIBRARY_PATH: >-
+          /code:/code/lib:/usr/local/lib:/opt/lib:/opt/php8.1/lib:/opt/php8.0/lib:/opt/php7.2/lib
+      code: ./

@@ -1,0 +1,1 @@
+{"blocksData":"<xml xmlns=\"http://www.w3.org/1999/xhtml\"><variables></variables></xml>","currentEditStep":2,"currentStep":2,"stepStateArr":["unlock","unlock","unlock"],"variableData":[null,null,null],"resultDataArr":[[],[],[]],"codeInputArr":["\ndef turn_right():\n  go(100,-100,0.65)\n  go(10,-10,0.3)\n\n\nfor i in range(4):\n  go(100,100,2.45)\n  turn_right() "]}

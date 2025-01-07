@@ -1,0 +1,86 @@
+def go(): pass
+def setTarget(): pass
+def get_ultrasound(): pass
+def get_color(): pass
+def inCurrentTask(): pass
+def print_shape(): pass
+def linear_regressor(): pass
+def poly_regressor(): pass
+def linear_classifier(): pass
+def visualize_data2D(): pass
+def visualize_data3D(): pass
+def accuracy(): pass
+def plot(): pass
+def fig(): pass
+def binary_linear_classifier(): pass
+def Perceptron(): pass
+def SVM(): pass
+def KMeans(): pass
+def load_dataset(): pass
+def scatter(): pass
+def DeepLearning(): pass
+def structure(): pass
+def merge_features(): pass
+def load(): pass
+def MLP(): pass
+def image(): pass
+def printMat2D(): pass
+def image_copy(): pass
+def image_int2float(): pass
+def map_color_space(): pass
+def image_float2int(): pass
+def bound(): pass
+def rgb2gray(): pass
+def binary_threshold(): pass
+def get_image_size(): pass
+def random_int(): pass
+def groundglass(): pass
+def compute_bin_assignment(): pass
+def get_bounding_box(): pass
+def get_most_frequent_color(): pass
+def oil_painting(): pass
+def sin(): pass
+def global_len_warp(): pass
+def local_warp_image(): pass
+def HOGExtractor(): pass
+def multi_class_classifier(): pass
+def ssnet(): pass
+def NNClassifier(): pass
+def detect_faces(): pass
+def crop_aligned_faces(): pass
+def extract_face_feature(): pass
+def optical_flow(): pass
+def image_add_flow(): pass
+def split_flow(): pass
+def optical_flow_video(): pass
+def video_add_flow(): pass
+def hof(): pass
+def DCGAN(): pass
+def readtext(): pass
+def splitwords(): pass
+def to_matrix(): pass
+def topic_model(): pass
+def load_stopwords(): pass
+def build_vocabulary(): pass
+def TermFrequency(): pass
+def TFIDF(): pass
+def load_private(): pass
+def load_train_data(): pass
+def load_test_data(): pass
+def extract_features(): pass
+def save_private(): pass
+def load_binary_train_data(): pass
+def load_binary_test_data(): pass
+def load_textbooks_data(): pass
+def detect_keypoints(): pass
+def draw_points(): pass
+def make_sticker(): pass
+def gif(): pass
+class data:
+    def get(): pass
+class mlc:
+    def train(): pass
+img_raw, img_wzj, img_gray, img_sand = None
+img_shibe, img_anchor, img_boy, split_words = None
+train_x_s, train_y, test_x_s, test_y, train_x_m = None
+test_x_m = None

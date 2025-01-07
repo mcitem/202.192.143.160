@@ -1,0 +1,16 @@
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+:root {
+  --mcitem-box-shadow: #e0e0e0;
+  --mcitem-color: #000;
+}
+.dark {
+  --mcitem-box-shadow: #000;
+  --mcitem-color: #fff;
+}
+body {
+  overflow-y: scroll; /* 始终显示垂直滚动条 */
+}
